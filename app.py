@@ -27,7 +27,6 @@ if uploaded_file is not None:
         # Display the results
         if not results.empty:
             for _, row in results.iterrows():
-                st.write(f"**Authors:** {row['Authors']}")
                 st.write(f"**Affiliations:** {row['Affiliations']}")
                 st.write(f"**Title:** {row['Title']}")
                 # Create a hyperlink that opens in a new tab
