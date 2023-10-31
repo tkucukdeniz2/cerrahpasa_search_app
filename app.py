@@ -10,6 +10,8 @@ def search_affiliations(df):
     
     return result
 
+# Display the logo at the top of the app
+st.image("logo.png", use_column_width=True)
 st.title('Search Scopus Export Data for Affiliations')
 
 # Upload the CSV file
@@ -27,7 +29,6 @@ if uploaded_file is not None:
         # Display the results
         if not results.empty:
             for _, row in results.iterrows():
-                st.write(f"**Affiliations:** {row['Affiliations']}")
                 st.write(f"**Title:** {row['Title']}")
                 # Create a hyperlink that opens in a new tab
                 st.markdown(f"**Link:** <a href='{row['Link']}' target='_blank'>{row['Link']}</a>", unsafe_allow_html=True)
