@@ -10,7 +10,7 @@ def search_affiliations(df):
     
     return result
 
-st.title('Upload SCOPUS export data:')
+st.title('Search Scopus Export Data for Affiliations')
 
 # Upload the CSV file
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
@@ -26,7 +26,13 @@ if uploaded_file is not None:
         
         # Display the results
         if not results.empty:
-            st.write(results)
+            for _, row in results.iterrows():
+                st.write(f"**Authors:** {row['Authors']}")
+                st.write(f"**Affiliations:** {row['Affiliations']}")
+                st.write(f"**Title:** {row['Title']}")
+                # Create a hyperlink that opens in a new tab
+                st.markdown(f"**Link:** <a href='{row['Link']}' target='_blank'>{row['Link']}</a>", unsafe_allow_html=True)
+                st.write("---")  # Add a separator line
         else:
             st.write("No entries found with 'cerrah' in the 'Affiliations' column.")
     else:
