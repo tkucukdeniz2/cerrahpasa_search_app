@@ -4,9 +4,13 @@ import pandas as pd
 def search_affiliations(df):
     # Filter rows where 'Affiliations' column contains the string 'cerrah'
     result = df[df['Affiliations'].str.contains('cerrah', case=False, na=False)]
+    
+    # Select only the specified columns
+    result = result[['Authors', 'Affiliations', 'Title', 'Link']]
+    
     return result
 
-st.title('Search CSV for Affiliations')
+st.title('Upload SCOPUS export data:')
 
 # Upload the CSV file
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
