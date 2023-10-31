@@ -11,7 +11,7 @@ def search_affiliations(df):
     return result
 
 # Display the logo at the top of the app
-st.image("logo.png", use_column_width=True)
+st.image("FileHandler.jpg", use_column_width=True)
 st.title('Search Scopus Export Data for Affiliations')
 
 # Upload the CSV file
