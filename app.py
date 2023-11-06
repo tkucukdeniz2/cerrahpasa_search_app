@@ -1,56 +1,61 @@
 import streamlit as st
 import pandas as pd
 
+# Custom CSS to inject corporate-style into the app.
+def local_css(file_name):
+    with open(file_name) "r") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+# Function to search affiliations for a given term.
 def search_affiliations(df, search_term):
-    # Filter rows where 'Affiliations' column contains the search term
     result = df[df['Affiliations'].str.contains(search_term, case=False, na=False)]
-    # Select only the specified columns
     result = result[['Authors', 'Affiliations', 'Title', 'Link']]
     return result
 
+# Function to find unique titles between two dataframes.
 def find_unique_titles(df1, df2):
-    # Find titles in df1 that are not in df2
     unique_titles = df1[~df1['Title'].isin(df2['Title'])]
     return unique_titles
 
-# Display the logo at the top of the app
-st.image("FileHandler.jpg")
-st.title('Search Scopus Export Data for Affiliations')
+# Load custom CSS
+local_css("style.css")
 
-# Upload the first CSV file
-uploaded_file = st.file_uploader("Choose the first CSV file", type="csv", key="file1")
+# Display the logo and title in a more corporate style.
+st.image("FileHandler.jpg", width=200)
+st.title('Istanbul University-Cerrahpaşa Office of Corporate Data Management')
 
-# Upload the second CSV file
-uploaded_file_2 = st.file_uploader("Choose the second CSV file", type="csv", key="file2")
+# Instructions
+st.markdown("""
+    <div style="background-color:#f1f1f1; padding:10px; border-radius:5px; margin:10px 0;">
+    <h2>Instructions</h2>
+    <p>Upload the CSV files to compare the records based on the affiliations containing the term "cerrah". The first file is the primary dataset, and the second file is the reference to find unique records.</p>
+    </div>
+""", unsafe_allow_html=True)
 
-if uploaded_file is not None and uploaded_file_2 is not None:
-    # Read the first CSV file
+# File upload section
+with st.container():
+    uploaded_file = st.file_uploader("Choose the first CSV file", type="csv", key="file1")
+    uploaded_file_2 = st.file_uploader("Choose the second CSV file", type="csv", key="file2")
+
+# Process files
+if uploaded_file and uploaded_file_2:
     data_1 = pd.read_csv(uploaded_file)
-    
-    # Read the second CSV file
     data_2 = pd.read_csv(uploaded_file_2)
-    
-    # Check if 'Affiliations' column exists in the first CSV
+
     if 'Affiliations' in data_1.columns:
-        # Search for the string 'cerrah' in the 'Affiliations' column of the first CSV
         results = search_affiliations(data_1, 'cerrah')
-        
-        # If there are results, check if any title is not in the second CSV
         if not results.empty:
             unique_titles = find_unique_titles(results, data_2)
-            
-            # Display the results
             if not unique_titles.empty:
                 for _, row in unique_titles.iterrows():
+                    st.subheader(row['Title'])
                     st.write(f"**Authors:** {row['Authors']}")
                     st.write(f"**Affiliations:** {row['Affiliations']}")
-                    st.write(f"**Title:** {row['Title']}")
-                    # Create a hyperlink that opens in a new tab
-                    st.markdown(f"**Link:** <a href='{row['Link']}' target='_blank'>{row['Link']}</a>", unsafe_allow_html=True)
-                    st.write("---")  # Add a separator line
+                    st.markdown(f"[**Link to Document**]({row['Link']})", unsafe_allow_html=True)
+                    st.markdown("---")
             else:
-                st.write("All entries with 'cerrah' in the 'Affiliations' column of the first CSV are also present in the second CSV.")
+                st.info("All entries with 'cerrah' in the 'Affiliations' column of the first CSV are also present in the second CSV.")
         else:
-            st.write("No entries found with 'cerrah' in the 'Affiliations' column of the first CSV.")
+            st.warning("No entries found with 'cerrah' in the 'Affiliations' column of the first CSV.")
     else:
-        st.write("'Affiliations' column not found in the first CSV.")
+        st.error("'Affiliations' column not found in the first CSV.")
