@@ -28,10 +28,11 @@ with col1:
 
 with col2:
     st.markdown("""
-    <h1 style='text-align: left; color: black; padding-top: 30px;'>
-        Istanbul University-Cerrahpaşa Office of Corporate Data Management
+    <h1 style='text-align: left; color: black;'>
+        Istanbul University-Cerrahpaşa<br>Office of Corporate Data Management
     </h1>
     """, unsafe_allow_html=True)
+
 
 # Instructions
 st.markdown("""
