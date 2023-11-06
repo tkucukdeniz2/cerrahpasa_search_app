@@ -21,8 +21,17 @@ def find_unique_titles(df1, df2):
 local_css("style.css")
 
 # Display the logo and title in a more corporate style.
-st.image("FileHandler.jpg", width=200)
-st.title('Istanbul University-Cerrahpaşa Office of Corporate Data Management')
+col1, col2 = st.columns([1, 3])  # Adjust the ratio as needed for your layout
+
+with col1:
+    st.image("FileHandler.jpg", width=200)
+
+with col2:
+    st.markdown("""
+    <h1 style='text-align: left; color: black; padding-top: 30px;'>
+        Istanbul University-Cerrahpaşa Office of Corporate Data Management
+    </h1>
+    """, unsafe_allow_html=True)
 
 # Instructions
 st.markdown("""
