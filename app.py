@@ -24,7 +24,7 @@ local_css("style.css")
 col1, col2 = st.columns([1, 2])  # Adjust the ratio as needed for your layout
 
 with col1:
-    st.image("FileHandler.jpg", width=200)
+    st.image("FileHandler.jpg", width=166)
 
 with col2:
     st.markdown("""
@@ -38,7 +38,7 @@ with col2:
 st.markdown("""
     <div style="background-color:#f1f1f1; padding:10px; border-radius:5px; margin:10px 0;">
     <h2>Instructions</h2>
-    <p>Upload the CSV files to compare the records based on the affiliations containing the term "cerrah". The first file is the primary dataset, and the second file is the reference to find unique records.</p>
+    <p>Upload the CSV files to compare the records based on the affiliations containing the term "cerrahpasa". The first file is the primary dataset, and the second file is the reference to find unique records.</p>
     </div>
 """, unsafe_allow_html=True)
 
