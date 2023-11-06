@@ -3,7 +3,7 @@ import pandas as pd
 
 # Custom CSS to inject corporate-style into the app.
 def local_css(file_name):
-    with open(file_name) "r") as f:
+    with open(file_name, "r") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # Function to search affiliations for a given term.
