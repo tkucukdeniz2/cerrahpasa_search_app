@@ -21,7 +21,7 @@ def find_unique_titles(df1, df2):
 local_css("style.css")
 
 # Display the logo and title in a more corporate style.
-col1, col2 = st.columns([1, 3])  # Adjust the ratio as needed for your layout
+col1, col2 = st.columns([1, 4])  # Adjust the ratio as needed for your layout
 
 with col1:
     st.image("FileHandler.jpg", width=200)
