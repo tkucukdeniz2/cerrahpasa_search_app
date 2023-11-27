@@ -44,8 +44,8 @@ st.markdown("""
 
 # File upload section
 with st.container():
-    uploaded_file = st.file_uploader("Choose the first CSV file", type="csv", key="file1")
-    uploaded_file_2 = st.file_uploader("Choose the second CSV file", type="csv", key="file2")
+    uploaded_file = st.file_uploader("Choose the first CSV file (Other Institute)", type="csv", key="file1")
+    uploaded_file_2 = st.file_uploader("Choose the second CSV file (Own Institute)", type="csv", key="file2")
 
 # Process files
 if uploaded_file and uploaded_file_2:
